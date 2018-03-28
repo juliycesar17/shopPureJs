@@ -96,10 +96,10 @@ $("body" ).on( "click", '.sel_cat', function(e) {
 
     if (window.location != statesWithWWW + '/select-cat' && window.location!=statesWithoutWWW.main+'select-cat') {
         if ( window.location.origin == origin.originWithWWW ) {
-          history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithWWW.main+'select-cat');
+          history.pushState(statesWithWWW.main+'select-cat.php?vid='+$(this).attr('data-vid'), document.title, statesWithWWW.main+'select-cat');
         }
         else {
-          history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithoutWWW.main+'select-cat');
+          history.pushState(statesWithWWW.main+'select-cat.php?vid='+$(this).attr('data-vid'), document.title, statesWithoutWWW.main+'select-cat');
         }
     }
 
