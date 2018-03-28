@@ -1,11 +1,15 @@
 function ListControllershop() {
+
     ListControllerParent.apply(this, Array.prototype.slice.call(arguments, 0));
     let _this = this;
+
     arguments[1].loadHtmlForShop.attachd(function () {
-        let htmlElements = arguments[1];
+
+         let htmlElements = arguments[1];
+         console.log(htmlElements);
         _this.newState(htmlElements);
     });
- 
+
 $("body" ).on( "click", '#ind', function(e) {
   let _thiss = this;
 
@@ -25,6 +29,40 @@ _this._view.generateInitView();
 
 });
 
+$("body" ).on( "click", '.ind', function(e) {
+  let _thiss = this;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  let items = $.parseJSON('{ "reklama" : "МОРОЖЕНОЕ", "title":"главная страница"}');
+  if ( window.location!= statesWithWWW.main && window.location!= statesWithoutWWW.main ) {
+     if ( window.location.origin == origin.originWithWWW ) {
+        history.pushState(statesWithWWW.main + 'index.php', document.title, statesWithWWW.main +'.');
+      } else {
+          history.pushState(statesWithWWW.main+'index.php', document.title, statesWithoutWWW.main);
+        }
+  }
+
+_this._view.generateInitView();
+
+});
+
+
+$("body" ).on( "click", '.shop', function(e) {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (window.location!=statesWithWWW+'shop' && window.location!=statesWithoutWWW.main+'shop' ) {
+        if ( window.location.origin == origin.originWithWWW ) {
+          history.pushState(statesWithWWW.main+'shop', document.title, statesWithWWW.main+'shop');}
+        else {history.pushState(statesWithWWW.main+'shop', document.title, statesWithoutWWW.main+'shop');}
+      }
+
+      _this._view.loadHtmlForShop.notify({phpScript:'shop.php','title':'browseshop'});
+  });
+
 arguments[1]._elements.goToShop.on( "click", function(e) {
 
     e.preventDefault();
@@ -35,7 +73,7 @@ arguments[1]._elements.goToShop.on( "click", function(e) {
         history.pushState(statesWithWWW.main+'shop', document.title, statesWithWWW.main+'shop');}
       else {history.pushState(statesWithWWW.main+'shop', document.title, statesWithoutWWW.main+'shop');}
     }
-    _this._view.loadHtmlForShop.notify({url:'shop.php','title':'browseshop'});
+    _this._view.loadHtmlForShop.notify({phpScript:'shop.php','title':'browseshop'});
 });
 
 $("body" ).on( "click", '#recipe', function(e) {
@@ -47,34 +85,37 @@ $("body" ).on( "click", '#recipe', function(e) {
       if ( window.location.origin == origin.originWithWWW ) {
         history.pushState(statesWithWWW.main+'recipe.php', document.title, statesWithWWW.main+'recipe.php');
       }
-      else { 
+      else {
          history.pushState(statesWithWWW.main+'recipe.php', document.title, statesWithoutWWW.main+'recipe.php');
       }
     }
-    _this._view.loadHtmlForShop.notify({url:'recipe.php','title':'recipe'});
+    _this._view.loadHtmlForShop.notify({phpScript:'recipe.php','title':'recipe'});
 });
 
 $("body" ).on( "click", '.sel_cat', function(e) {
+
+    if (window.location != statesWithWWW + '/select-cat' && window.location!=statesWithoutWWW.main+'select-cat') {
+        if ( window.location.origin == origin.originWithWWW ) {
+          history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithWWW.main+'select-cat');
+        }
+        else {
+          history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithoutWWW.main+'select-cat');
+        }
+    }
+
     let _thiss = this;
     let param_for_flexi_vid;
     let url_for_flexi;
     localStorage.setItem('param_for_flexi_vid', _thiss.getAttribute('data-vid'));
     localStorage.setItem('url_for_flexi',        _thiss.getAttribute('data-param') );
     let url_vid = localStorage.getItem('url_for_flexi');
+    console.log(url_vid);
     let vid_vid = localStorage.getItem('param_for_flexi_vid');
 
     e.preventDefault();
     e.stopPropagation();
 
-    if (window.location != statesWithWWW + '/select-cat' && window.location!=statesWithoutWWW.main+'select-cat') {
-      if ( window.location.origin == origin.originWithWWW ) {
-        history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithWWW.main+'select-cat');
-      }
-      else {
-        history.pushState(statesWithWWW.main+'flexi.php?vid='+$(this).attr('data-vid'), document.title, statesWithoutWWW.main+'select-cat');
-      }
-  }
-    _this._view.loadHtmlForShop.notify({url:url_vid, flex:vid_vid, 'title':'brows_items'}); //2 параметр для кеширования
+    _this._view.loadHtmlForShop.notify({phpScript:url_vid, flex:vid_vid, 'title':'brows_items'}); //2 параметр для кеширования
 });
 
 $("body" ).on( "click", '#blog', function(e) {
@@ -95,18 +136,18 @@ $("body" ).on( "click", '#blog', function(e) {
         history.pushState(statesWithWWW.main+'blog_n.php', document.title, statesWithoutWWW.main+'blog_n.php');
       }
   }
-    _this._view.loadHtmlForShop.notify({url:url_vid}); 
+    _this._view.loadHtmlForShop.notify({phpScript:url_vid});
 });
 
 $("body" ).on( "click", '.choose-brend', function(e) {
     let _thiss = this;
-    let url_for_flexi_one, arrr, arrrv, arrr_s;
-    localStorage.setItem('url_for_flexi_one', _thiss.getAttribute('data-param'));
+    let url_for_brend, arrr, arrrv, arrr_s;
+    localStorage.setItem('url_for_brend', _thiss.getAttribute('data-param'));
     localStorage.setItem('arrr', _thiss.getAttribute('data-brend'));
     localStorage.setItem('arrrv', _thiss.getAttribute('data-v'));
     localStorage.setItem('arrr_s', _thiss.getAttribute('data-ses'));
 
-    let url_tovari = localStorage.getItem('url_for_flexi_one');
+    let url_tovari = localStorage.getItem('url_for_brend');
     let brend_brend = localStorage.getItem('arrr');
     let vid_vid_vid = localStorage.getItem('arrrv');
     let ses_ses_ses = localStorage.getItem('arrr_s');
@@ -121,7 +162,7 @@ $("body" ).on( "click", '.choose-brend', function(e) {
       else {
         history.pushState(statesWithWWW.main+'flexi-tovari.php?q='+$(this).attr('data-brend')+'&vvv='+$(this).attr('data-v'), document.title, statesWithoutWWW.main+'choose-brend');}
     }
-    _this._view.loadHtmlForShop.notify({url:url_tovari, brend:brend_brend, vidd:vid_vid_vid,'title':'brows_items' });
+    _this._view.loadHtmlForShop.notify({phpScript:url_tovari, brend:brend_brend, vidd:vid_vid_vid,'title':'brows_items' });
 });
 
 $("body" ).on( "click", '.one_ice', function(e) {
@@ -145,7 +186,7 @@ $("body" ).on( "click", '.one_ice', function(e) {
         history.pushState(statesWithWWW.main+'get_flexi_one.php?q='+$(this).attr('data-idd'), document.title, statesWithoutWWW.main+'your-ice');
         }
       }
-      _this._view.loadHtmlForShop.notify({url:url_one_one, id:id_one_one,'title':'brows_item_one'});
+      _this._view.loadHtmlForShop.notify({phpScript:url_one_one, id:id_one_one,'title':'brows_item_one'});/*url*/
 });
 }
 
