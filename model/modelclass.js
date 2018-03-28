@@ -20,7 +20,7 @@ ListModelParent.prototype.ajax = function() {
 
 
     let data;
-	let phpScript = arguments[0].url;
+	  let phpScript = arguments[0].phpScript;
 
     if ( arguments[0].flex ) {var flex = arguments[0].flex;}
     if ( arguments[0].brend ) {var brend = arguments[0].brend;}
@@ -113,13 +113,13 @@ ListModelParent.prototype.ajax = function() {
 		}
 
         return $.ajax({
-			type: "POST",
-			url: phpScript,
-			data: data,
-			dataType: 'json',
-			beforeSend: function( xhr ) {
-				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			}
+					type: "POST",
+					url: phpScript,
+					data: data,
+					dataType: 'json',
+					beforeSend: function( xhr ) {
+						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				}
 		});
   }
 }
