@@ -11,10 +11,10 @@
 		var argus = arguments[1].not[0];
 	    var title = arguments[1].not[4];
 		_this._dataObj['your-ice.php-'+argus].added ='true';
-		return _this.ajax({url:'your-ice.php', id:argus}).then(function(msg) {
+		return _this.ajax({phpScript:'your-ice.php', id:argus}).then(function(msg) {
 
 			return _this.loadData(msg, 'your-ice.php',title)
-		});	;
+		});
 	});
 
 	arguments[2].loginEvent.attachd(function () {
