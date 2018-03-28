@@ -133,11 +133,11 @@ ListModelParent.prototype.loadData = function ( ) {
 		this.category_of_ice = arguments[0].category_of_ice;
 		this._dataObj[this._elem.toString()+'-'+this.category_of_ice.sess_vid] = this._items;
 	} else if (arguments[0].resp_array_of_sessions) {
-		this.parammmmmm = arguments[0].resp_array_of_sessions;
-		this._dataObj[this._elem.toString()+'-'+this.parammmmmm.sess_vid+'-'+this.parammmmmm.sess_qqq] = this._items;
+		this.resp_array_of_sessions = arguments[0].resp_array_of_sessions;
+		this._dataObj[this._elem.toString()+'-'+this.resp_array_of_sessions.sess_vid+'-'+this.resp_array_of_sessions.sess_qqq] = this._items;
 	} else if (arguments[0].id) {
-		this.parammmmmmid = arguments[0].id;
-		this._dataObj[this._elem.toString()+'-'+this.parammmmmmid.sess_one] = this._items;
+		this.id = arguments[0].id;
+		this._dataObj[this._elem.toString()+'-'+this.id.sess_one] = this._items;
 	} else {
 		this._dataObj[this._elem.toString()] = this._items;
 	}
